@@ -1,31 +1,24 @@
-import React, { useState } from 'react'
 
-export default function FAQ({ title, active, setActive }) {
-
-    const [answer, setAnswer] = useState(true)
+export default function FAQ({ title, active, setActive,text }) {
     const show = () => {
         setActive(title)
+        if(active === title){
+            setActive("")
+        }
     }
-    const close = () => {
-        setActive("")
-    }
-
     return (
         <div className='m-3 md:mx-10'>
             <div className={active !== title ? 'flex cursor-pointer items-center justify-between bg-fuchsia-900 text-white rounded-md p-2 sm:px-10 text-xl '
-                : 'rounded-b-3xl flex items-center justify-between bg-fuchsia-900 text-white  p-3 text-xl '}
+                : 'rounded-b-3xl flex items-center sm:px-10 justify-between bg-fuchsia-900 text-white  p-2 text-xl  cursor-pointer'}
                 onClick={show}>
-                <p className={active === title ? " m-auto" : "text-left"}>{title}</p>
+                <p >{title}</p>
                 <div className='text-3xl'>
                     {active !== title && <span>+</span>}
+                    {active === title && <span className="text-3xl">-</span>}
                 </div>
             </div>
-            {active === title ? <div className='bg-yellow-700 p-5 pb-1 text-white rounded-t-3xl flex flex-col'>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, libero Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, molestias?</p>
-                <span className=' bg-fuchsia-900 text-white  text-xl px-4  py-2 rounded-full  m-auto mt-2  cursor-pointer'
-                onClick={close}>
-                    X
-                </span>
+            {active === title ? <div className='bg-yellow-700 p-5  text-white rounded-t-3xl flex flex-col'>
+                <p>{text} </p>
             </div> : ""}
         </div>
     )
